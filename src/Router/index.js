@@ -1,16 +1,28 @@
 import React, { Suspense } from 'react'
-import { Route, useRoutes } from 'react-router';
+import { Navigate, useLocation, useRoutes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import About from '../Pages/About';
-import Contact from '../Pages/Contact';
-import Home from '../Pages/Home';
+import BlankLayout from '../layouts/BlankLayout';
+import Defaultlayout from '../layouts/Defaultlayout';
 import { routes } from './routes'
 
+export const Layouts = ['BlankLayout', 'Defaultlayout']
 
+const isAuth = false;
 
 const Routes = () => {
+
     const elements = useRoutes(routes);
-    return elements;
+    const { pathname } = useLocation();
+    const selectedRoute = routes.find(p => p.path === pathname)
+    if (selectedRoute === undefined) {
+        return <Navigate to='error' />
+    }
+    else {
+        const meta = routes.find(p => p.path === pathname).meta
+        return meta === 'auth' && isAuth === false ?
+            <Navigate to="/Login" replace /> : selectedRoute.layout === 'Blank' ?
+                <BlankLayout> {elements}</BlankLayout> : <Defaultlayout>{elements}</Defaultlayout>
+    }
 }
 
 const index = () => {
@@ -19,11 +31,6 @@ const index = () => {
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes />
             </Suspense>
-            {/* <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/About" element={<About />} />
-                <Route path="/Contact" element={<Contact />} />
-            </Routes> */}
         </BrowserRouter>
     )
 }
