@@ -26,7 +26,7 @@ export const routes = [
             {
                 path: 'profile',
                 element: <Profile />,
-                meta: 'auth'
+                meta: 'admin'
             },
             {
                 path: 'about',
