@@ -12,17 +12,19 @@ const isAuth = false;
 const Routes = () => {
 
     const elements = useRoutes(routes);
-    const { pathname } = useLocation();
-    const selectedRoute = routes.find(p => p.path === pathname)
-    if (selectedRoute === undefined) {
-        return <Navigate to='error' />
-    }
-    else {
-        const meta = routes.find(p => p.path === pathname).meta
-        return meta === 'auth' && isAuth === false ?
-            <Navigate to="/Login" replace /> : selectedRoute.layout === 'Blank' ?
-                <BlankLayout> {elements}</BlankLayout> : <Defaultlayout>{elements}</Defaultlayout>
-    }
+    // const selectedRoute = routes.map((item) => {
+    //     return console.log('item', item.children.find(x => x.meta == 'auth'))
+    // })
+    console.log(elements)
+    return elements;
+    // if (selectedRoute === undefined) {
+    //     return <Navigate to='/error' />
+    // }
+    // else {
+    //     const meta = routes.find(p => p.path === pathname).meta
+    //     return meta === 'auth' && isAuth === false ?
+    //         <Navigate to="/login" replace /> : elements
+    // }
 }
 
 const index = () => {

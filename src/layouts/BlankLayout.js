@@ -1,10 +1,11 @@
 import React from 'react'
+import { Outlet } from 'react-router'
 
-const BlankLayout = ({children}) => {
+const BlankLayout = ({ children }) => {
     return (
         <div>
             bu BlankLayout
-            {children}
+            <Outlet />
         </div>
     )
 }
