@@ -6,5 +6,9 @@ export const authorities = [
     {
         meta: 'user',
         ability: 'not-all'
-    }
+    },
+    {
+        meta: 'auth',
+        ability: 'bıt bıt'
+    },
 ]
